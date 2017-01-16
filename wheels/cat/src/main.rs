@@ -27,9 +27,8 @@ fn main() {
 }
 
 fn output(reader: &mut BufRead) {
-    let mut input = String::new();
-    while reader.read_line(&mut input).unwrap() > 0 {
-        io::stdout().write(input.as_bytes()).unwrap();
-        input.clear();
+    let mut buffer = [0; 2048];
+    while reader.read(&mut buffer[..]).unwrap() > 0 {
+        io::stdout().write(&buffer).unwrap();
     }
 }
